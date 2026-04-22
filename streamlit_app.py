@@ -202,11 +202,17 @@ input_df = pd.DataFrame([[age, sex, cp, trestbps, chol, fbs, restecg, thalach, e
 # ============================================
 st.markdown("<h1 class='main-title'>HEART DISEASE PREDICTOR</h1>", unsafe_allow_html=True)
 
+from groq import Groq
+
 def get_ai_advice(data, risk_level, name):
+    # Initialize Groq client (You'll put your key in Streamlit Secrets later)
+    client = Groq(api_key="YOUR_GROQ_API_KEY") 
     try:
-        prompt = f"Act as Cardiologist. Patient {name}, Risk {risk_level}, Data {data.to_dict()}. Provide 3 concise advice points."
-        response = ollama.chat(model='llama3:8b-instruct-q4_K_M', messages=[{'role': 'user', 'content': prompt}])
-        return response['message']['content']
+        response = client.chat.completions.create(
+            model="llama3-8b-8192",
+            messages=[{"role": "user", "content": f"Advice for {name}, {risk_level} risk..."}]
+        )
+        return response.choices[0].message.content
     except Exception as e:
         return f"AI Error: {str(e)}"
 
