@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-import ollama
+
 from fpdf import FPDF
 from datetime import datetime
 import io
