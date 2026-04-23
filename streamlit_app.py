@@ -1,10 +1,10 @@
 import streamlit as st
 import pandas as pd
-import ollama
-from fpdf import FPDF
 from datetime import datetime
 import io
 import re
+from fpdf import FPDF
+from groq import Groq
 
 # ============================================
 # PAGE CONFIG & SETUP
@@ -206,16 +206,16 @@ from groq import Groq
 
 def get_ai_advice(data, risk_level, name):
     try:
-        # Get a free key at https://console.groq.com/
-        client = Groq(api_key=st.secrets["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"]) 
+        # Pulls the key from Streamlit's Secret Manager (Step 3 below)
+        client = Groq(api_key=st.secrets["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"])
         
         prompt = f"Act as Cardiologist. Patient {name}, Risk {risk_level}, Data {data.to_dict()}. Provide 3 concise advice points."
         
-        chat_completion = client.chat.completions.create(
-            messages=[{"role": "user", "content": prompt}],
-            model="llama3-8b-8192",
+        response = client.chat.completions.create(
+            model="llama-3.1-8b-instant",
+            messages=[{"role": "user", "content": prompt}]
         )
-        return chat_completion.choices[0].message.content
+        return response.choices[0].message.content
     except Exception as e:
         return f"AI Error: {str(e)}"
 
