@@ -206,16 +206,16 @@ from groq import Groq
 
 def get_ai_advice(data, risk_level, name):
     try:
-        # You would get a free API key from console.groq.com
-        client = Groq(api_key="YOUR_GROQ_API_KEY")
+        # Get a free key at https://console.groq.com/
+        client = Groq(api_key=st.secrets["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"]) 
         
         prompt = f"Act as Cardiologist. Patient {name}, Risk {risk_level}, Data {data.to_dict()}. Provide 3 concise advice points."
         
-        completion = client.chat.completions.create(
+        chat_completion = client.chat.completions.create(
+            messages=[{"role": "user", "content": prompt}],
             model="llama3-8b-8192",
-            messages=[{"role": "user", "content": prompt}]
         )
-        return completion.choices[0].message.content
+        return chat_completion.choices[0].message.content
     except Exception as e:
         return f"AI Error: {str(e)}"
 
