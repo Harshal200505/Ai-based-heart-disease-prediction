@@ -3,9 +3,8 @@ import pandas as pd
 from datetime import datetime
 import io
 import re
-from fpdf import FPDF
-from groq import Groq
-
+from fpdf import FPDF  # Installed via fpdf2 in requirements.txt
+from groq import Groq  # For AI clinical advice
 # ============================================
 # PAGE CONFIG & SETUP
 # ============================================
