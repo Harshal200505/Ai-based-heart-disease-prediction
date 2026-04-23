@@ -164,8 +164,7 @@ def create_professional_pdf(patient_name, age, sex, risk, ai_advice, clinical_da
     pdf.set_font("Arial", '', 10)
     pdf.multi_cell(0, 6, clean(ai_advice))
     
-    return pdf.output(dest='S').encode('latin-1', 'replace')
-
+    return pdf.output() # In fpdf2, output() returns bytes by default
 # ============================================
 # SIDEBAR
 # ============================================
