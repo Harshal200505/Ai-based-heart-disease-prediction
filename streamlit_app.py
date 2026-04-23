@@ -198,7 +198,7 @@ input_df = pd.DataFrame([[age, sex, cp, trestbps, chol, fbs, restecg, thalach, e
 # ============================================
 st.markdown("<h1 class='main-title'>HEART DISEASE PREDICTOR</h1>", unsafe_allow_html=True)
 
-from groq import Groq
+
 
 def get_ai_advice(data, risk_level, name):
     try:
